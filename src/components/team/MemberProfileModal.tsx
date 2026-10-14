@@ -47,12 +47,20 @@ export function MemberProfileModal({
         {/* ================= 1. PERSON INFO HEADER ================= */}
         <div className="flex flex-col sm:flex-row items-center sm:items-start gap-5 p-5 rounded-2xl bg-[#090d1a] border border-amber-400/30 shadow-[0_0_25px_rgba(246,226,122,0.12)]">
           {/* Avatar Graphic */}
-          <div className="relative w-20 h-20 rounded-2xl bg-gradient-to-tr from-[#1f1807] via-[#101524] to-[#080c16] border-2 border-amber-400/60 flex items-center justify-center shrink-0 shadow-[0_0_20px_rgba(246,226,122,0.25)]">
-            <span className="text-3xl font-extrabold text-[#F6E27A]">
-              {member.name.charAt(0)}
-            </span>
-            <div className="absolute -bottom-2 px-2.5 py-0.5 rounded-full text-[9px] font-mono font-bold bg-[#F6E27A] text-[#07090E] shadow-sm">
-              CORE 04
+          <div className="relative w-20 h-20 rounded-2xl bg-gradient-to-tr from-[#1f1807] via-[#101524] to-[#080c16] border-2 border-amber-400/60 overflow-hidden flex items-center justify-center shrink-0 shadow-[0_0_20px_rgba(246,226,122,0.25)]">
+            {member.avatarUrl ? (
+              <img
+                src={member.avatarUrl}
+                alt={member.name}
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <span className="text-3xl font-extrabold text-[#F6E27A]">
+                {member.name.charAt(0)}
+              </span>
+            )}
+            <div className="absolute bottom-0 inset-x-0 py-0.5 text-center text-[8px] font-mono font-bold bg-[#F6E27A] text-[#07090E] shadow-sm">
+              OUTLIERS
             </div>
           </div>
 
@@ -62,12 +70,6 @@ export function MemberProfileModal({
               <span className="text-xs font-mono font-semibold text-amber-300">
                 {member.role}
               </span>
-              {member.ghibliRole && (
-                <span className="inline-flex items-center gap-1 text-[10px] font-serif italic text-amber-200/90 bg-amber-950/60 px-2.5 py-0.5 rounded-full border border-amber-400/30">
-                  <Wand2 className="w-2.5 h-2.5 text-[#F6E27A]" />
-                  <span>{member.ghibliRole}</span>
-                </span>
-              )}
             </div>
 
             <p className="text-xs sm:text-sm font-medium text-[#FFFDF5] italic leading-snug">

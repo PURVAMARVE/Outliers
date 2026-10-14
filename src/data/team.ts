@@ -7,7 +7,7 @@ export const teamMembers: TeamMember[] = [
     role: "Backend & Systems Architect",
     tagline: "Scalable software solutions, backend architectures, and AI-powered applications.",
     bio: "Third-year Computer Science and Engineering (AI & ML) student with experience in Java, Python, backend development, and AI-powered applications.",
-    avatarUrl: "/images/team/member-1.webp",
+    avatarUrl: "/team/tejas.jpeg",
     avatarSeed: "Tejas",
     accentColor: "#E5A93C",
     skills: {
@@ -49,7 +49,7 @@ export const teamMembers: TeamMember[] = [
     role: "Frontend Lead & Agentic AI Specialist",
     tagline: "Turning ambitious ideas into functional, captivating digital experiences.",
     bio: "CSE (AI & ML) student who loves building intuitive frontend experiences, exploring Agentic AI systems, and competing in fast-paced hackathons.",
-    avatarUrl: "/images/team/member-2.webp",
+    avatarUrl: "/team/purva.jpeg",
     avatarSeed: "Purva",
     accentColor: "#F3C969",
     skills: {
@@ -92,7 +92,7 @@ export const teamMembers: TeamMember[] = [
     role: "Full-Stack MERN & Security Architect",
     tagline: "Clean, efficient code for secure banking ledgers and AI-enhanced web platforms.",
     bio: "Passionate Full-Stack Developer specializing in MERN engineering, scalable ledger systems, and intuitive UI/UX design.",
-    avatarUrl: "/images/team/member-3.webp",
+    avatarUrl: "/team/anuradha.jpeg",
     avatarSeed: "Anuradha",
     accentColor: "#D4AF37",
     skills: {
@@ -134,7 +134,7 @@ export const teamMembers: TeamMember[] = [
     role: "Lead AI/ML & Deep Learning Engineer",
     tagline: "Understanding systems beyond the interface. Engineering solutions beyond the obvious.",
     bio: "Computer Science and AI/ML engineer exploring deep learning, NLP sentiment analysis, and containerized deployment infrastructure.",
-    avatarUrl: "/images/team/member-4.webp",
+    avatarUrl: "/team/shreeraj.jpeg",
     avatarSeed: "Shreeraj",
     accentColor: "#F1B743",
     skills: {
