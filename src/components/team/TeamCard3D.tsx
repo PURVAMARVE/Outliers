@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { TeamMember } from "@/types";
-import { RotateCw, ArrowRight, Sparkles, User, Wand2 } from "lucide-react";
+import { RotateCw, ArrowRight, Sparkles, User, Code2, Layers, CheckCircle2 } from "lucide-react";
 
 interface TeamCard3DProps {
   member: TeamMember;
@@ -13,6 +13,7 @@ interface TeamCard3DProps {
 
 export function TeamCard3D({ member, index, onOpenModal, forceFlipped }: TeamCard3DProps) {
   const [manualFlipped, setManualFlipped] = useState<boolean | null>(null);
+  const [imgError, setImgError] = useState(false);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
 
   const isFlipped = manualFlipped !== null ? manualFlipped : Boolean(forceFlipped);
@@ -37,6 +38,41 @@ export function TeamCard3D({ member, index, onOpenModal, forceFlipped }: TeamCar
     e.stopPropagation();
     setManualFlipped(!isFlipped);
   };
+
+  // Reusable Professional Photo Component (Identical photo on both front and back)
+  const renderProfessionalPhoto = (size = "w-32 h-32") => (
+    <div className="relative my-2 flex flex-col items-center">
+      <div
+        className={`relative ${size} rounded-2xl p-1 bg-gradient-to-br from-[#1e1909] via-[#0d1222] to-[#040713] border-2 border-amber-400/50 group-hover:border-amber-300 shadow-[0_0_25px_rgba(246,226,122,0.25)] flex items-center justify-center transition-all overflow-hidden`}
+      >
+        {/* Orbiting Stardust Glow */}
+        <div className="absolute inset-0 rounded-2xl dashed-arc-gold group-hover:rotate-180 transition-all duration-1000 opacity-60" />
+
+        {/* Member Photo or Executive Fallback */}
+        <div className="relative w-full h-full rounded-xl bg-gradient-to-b from-[#182033] to-[#0b0f1d] flex flex-col items-center justify-center text-center overflow-hidden border border-amber-400/20">
+          {member.avatarUrl && !imgError ? (
+            <img
+              src={member.avatarUrl}
+              alt={member.name}
+              onError={() => setImgError(true)}
+              className="w-full h-full object-cover object-center"
+            />
+          ) : (
+            <div className="flex flex-col items-center justify-center">
+              <div className="w-14 h-14 rounded-full bg-gradient-to-tr from-amber-900/60 to-amber-700/30 border border-amber-400/50 flex items-center justify-center mb-1 shadow-[0_0_15px_rgba(246,226,122,0.3)]">
+                <span className="text-2xl font-display font-black text-[#F6E27A]">
+                  {member.name.charAt(0)}
+                </span>
+              </div>
+              <span className="text-[9px] font-mono uppercase tracking-wider text-amber-300/90 bg-black/70 px-2 py-0.5 rounded-full border border-amber-400/30">
+                Outliers #{String(index + 1).padStart(2, "0")}
+              </span>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
 
   return (
     <div
@@ -69,33 +105,16 @@ export function TeamCard3D({ member, index, onOpenModal, forceFlipped }: TeamCar
             </span>
             <button
               onClick={toggleFlip}
-              aria-label="Flip to Ghibli persona"
+              aria-label="Flip to technical focus"
               className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-amber-400/30 bg-amber-950/40 hover:bg-amber-400/20 text-[10px] font-mono text-amber-300 transition-colors"
             >
-              <Wand2 className="w-3 h-3 text-[#F6E27A]" />
-              <span>Ghibli ↺</span>
+              <Code2 className="w-3 h-3 text-[#F6E27A]" />
+              <span>Skills ↺</span>
             </button>
           </div>
 
-          {/* Professional Photo Slot */}
-          <div className="relative my-2 flex flex-col items-center">
-            <div className="relative w-36 h-36 rounded-2xl p-1.5 bg-gradient-to-br from-[#1e1909] via-[#0d1222] to-[#040713] border-2 border-amber-400/40 group-hover:border-amber-300 shadow-[0_0_25px_rgba(246,226,122,0.2)] flex items-center justify-center transition-all overflow-hidden">
-              {/* Outer Dashed Arc */}
-              <div className="absolute inset-0 rounded-2xl dashed-arc-gold group-hover:rotate-180 transition-all duration-1000 opacity-60" />
-
-              {/* Photo / Silhouette Placeholder */}
-              <div className="relative w-full h-full rounded-xl bg-gradient-to-b from-[#182033] to-[#0b0f1d] flex flex-col items-center justify-center text-center p-2 overflow-hidden border border-amber-400/20">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-amber-900/60 to-amber-700/30 border border-amber-400/40 flex items-center justify-center mb-1">
-                  <span className="text-2xl font-display font-black text-[#F6E27A]">
-                    {member.name.charAt(0)}
-                  </span>
-                </div>
-                <span className="text-[9px] font-mono uppercase tracking-wider text-amber-300/80 bg-black/60 px-2 py-0.5 rounded-full border border-amber-400/30">
-                  Professional Photo
-                </span>
-              </div>
-            </div>
-          </div>
+          {/* Professional Photo */}
+          {renderProfessionalPhoto("w-32 h-32")}
 
           {/* Member Name & Role */}
           <div className="text-center">
@@ -126,13 +145,13 @@ export function TeamCard3D({ member, index, onOpenModal, forceFlipped }: TeamCar
             {/* Bottom Flip Prompt */}
             <div className="flex items-center justify-center gap-1.5 text-[11px] font-mono text-slate-400 hover:text-amber-300 transition-colors">
               <Sparkles className="w-3 h-3 text-[#F6E27A]" />
-              <span>Tap card to view Ghibli persona</span>
+              <span>Tap card to view technical focus</span>
               <RotateCw className="w-3 h-3 text-amber-400 ml-0.5" />
             </div>
           </div>
         </div>
 
-        {/* ================= BACK OF CARD: GHIBLI ANIME ALTER-EGO ================= */}
+        {/* ================= BACK OF CARD: TECHNICAL FOCUS & CORE ARSENAL (SAME PHOTO) ================= */}
         <div
           className="absolute inset-0 rounded-3xl p-6 border border-amber-300/60 shadow-[0_0_35px_rgba(246,226,122,0.3)] flex flex-col justify-between bg-gradient-to-b from-[#141009] via-[#0d1222] to-[#080d1a] shadow-2xl"
           style={{
@@ -145,46 +164,71 @@ export function TeamCard3D({ member, index, onOpenModal, forceFlipped }: TeamCar
           {/* Back Top Bar */}
           <div className="flex items-center justify-between">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-amber-400/40 bg-amber-950/70 text-amber-200 text-[11px] font-mono shadow-[0_0_12px_rgba(246,226,122,0.2)]">
-              <Sparkles className="w-3 h-3 text-[#F6E27A]" />
-              <span>GHIBLI ALTER-EGO</span>
+              <Layers className="w-3 h-3 text-[#F6E27A]" />
+              <span>CORE ARCHITECTURE</span>
             </span>
             <button
               onClick={toggleFlip}
-              aria-label="Flip back to professional card"
+              aria-label="Flip back to front"
               className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full border border-amber-400/30 bg-amber-950/40 hover:bg-amber-400/20 text-[10px] font-mono text-amber-300 transition-colors"
             >
-              <span>Photo ↺</span>
+              <span>Front ↺</span>
             </button>
           </div>
 
-          {/* Ghibli Anime Photo Slot */}
-          <div className="relative my-2 flex flex-col items-center">
-            <div className="relative w-36 h-36 rounded-2xl p-1.5 bg-gradient-to-br from-[#2a220d] via-[#1a1429] to-[#0a0f1d] border-2 border-amber-300/70 shadow-[0_0_25px_rgba(246,226,122,0.3)] flex items-center justify-center transition-all overflow-hidden">
-              {/* Outer Dashed Arc with Stardust Glow */}
-              <div className="absolute inset-0 rounded-2xl dashed-arc-gold group-hover:rotate-180 transition-all duration-1000 opacity-80" />
-
-              {/* Anime Persona Slot */}
-              <div className="relative w-full h-full rounded-xl bg-gradient-to-b from-[#251d12] to-[#0f1422] flex flex-col items-center justify-center text-center p-2 overflow-hidden border border-amber-300/40">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-amber-500/30 to-amber-300/20 border border-amber-300/60 flex items-center justify-center mb-1 shadow-[0_0_15px_rgba(246,226,122,0.3)]">
-                  <Wand2 className="w-8 h-8 text-[#F6E27A] animate-pulse" />
-                </div>
-                <span className="text-[9px] font-mono uppercase tracking-wider text-[#F6E27A] bg-amber-950/80 px-2 py-0.5 rounded-full border border-amber-400/50">
-                  Ghibli Picture
+          {/* Member Identity & Compact Photo */}
+          <div className="flex items-center gap-3 py-1 px-2 rounded-2xl bg-amber-950/30 border border-amber-400/20">
+            <div className="w-12 h-12 rounded-xl overflow-hidden border border-amber-400/40 shrink-0 bg-[#182033] flex items-center justify-center">
+              {member.avatarUrl && !imgError ? (
+                <img
+                  src={member.avatarUrl}
+                  alt={member.name}
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <span className="text-base font-display font-black text-[#F6E27A]">
+                  {member.name.charAt(0)}
                 </span>
-              </div>
+              )}
+            </div>
+            <div className="min-w-0">
+              <h4 className="text-sm font-display font-bold text-white truncate">
+                {member.name}
+              </h4>
+              <p className="text-[11px] font-mono text-amber-300 truncate">
+                {member.role}
+              </p>
             </div>
           </div>
 
-          {/* Ghibli Name & Role */}
-          <div className="text-center">
-            <h3 className="text-lg font-display font-bold text-[#FFFDF5] tracking-tight">
-              {member.name}
-            </h3>
-            <p className="text-xs font-serif italic text-[#F6E27A] mt-1 font-semibold">
-              ✦ {member.ghibliRole || "Spirit Navigator"}
+          {/* Core Technical Arsenal (Pills) */}
+          <div className="my-2">
+            <p className="text-[10px] font-mono uppercase tracking-wider text-slate-400 mb-2 flex items-center gap-1">
+              <Code2 className="w-3 h-3 text-[#F6E27A]" />
+              <span>Primary Technical Arsenal:</span>
             </p>
-            <p className="text-xs text-amber-200/80 italic line-clamp-2 leading-relaxed mt-2 font-light">
-              “{member.ghibliTagline || member.tagline}”
+            <div className="flex flex-wrap gap-1.5 max-h-24 overflow-hidden">
+              {member.skills.core.concat(member.skills.secondary.slice(0, 3)).map((skill) => (
+                <span
+                  key={skill}
+                  className="px-2 py-0.5 rounded-lg bg-amber-950/50 border border-amber-400/30 text-[10px] font-mono text-amber-200"
+                >
+                  {skill}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Flagship Impact */}
+          <div className="p-2.5 rounded-xl bg-black/50 border border-white/5">
+            <p className="text-[10px] font-mono text-slate-400 uppercase tracking-wider">
+              Flagship Impact
+            </p>
+            <p className="text-xs font-display font-bold text-[#FFFDF5] mt-0.5">
+              {member.strongestProject.title}
+            </p>
+            <p className="text-[11px] text-slate-300 line-clamp-2 mt-0.5 font-light">
+              {member.strongestProject.description}
             </p>
           </div>
 
@@ -204,7 +248,7 @@ export function TeamCard3D({ member, index, onOpenModal, forceFlipped }: TeamCar
             {/* Bottom Flip Prompt */}
             <div className="flex items-center justify-center gap-1.5 text-[11px] font-mono text-slate-400 hover:text-amber-300 transition-colors">
               <User className="w-3 h-3 text-[#F6E27A]" />
-              <span>Tap to return to photo card</span>
+              <span>Tap to return to overview</span>
               <RotateCw className="w-3 h-3 text-amber-400 ml-0.5" />
             </div>
           </div>

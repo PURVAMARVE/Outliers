@@ -46,11 +46,11 @@ export function WhyChooseUsSection() {
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-amber-400/40 bg-amber-950/40 text-amber-300 text-xs font-mono uppercase tracking-wider mb-3 shadow-[0_0_15px_rgba(212,175,55,0.15)]">
             <Sparkles className="w-3.5 h-3.5 text-[#F6E27A]" />
-            <span>03 • THE OUTLIERS ADVANTAGE</span>
+            <span>04 • WHY OUTLIERS</span>
           </div>
 
           <h2 className="text-3xl sm:text-5xl font-display font-bold text-white tracking-tight mb-3">
-            Why We Are The Perfect Squad
+            Why Outliers
           </h2>
 
           <p className="text-base sm:text-lg font-display font-medium text-transparent bg-clip-text bg-gradient-to-r from-[#FFFDF5] via-[#F6E27A] to-[#D4AF37] mb-3 italic">

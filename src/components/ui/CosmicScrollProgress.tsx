@@ -13,6 +13,7 @@ const SECTIONS = [
   { id: "hero", label: "Origin" },
   { id: "team", label: "Who We Are" },
   { id: "projects", label: "Projects" },
+  { id: "achievements", label: "Achievements" },
   { id: "why-us", label: "The Outliers Advantage" },
   { id: "contact", label: "Contact" },
 ];

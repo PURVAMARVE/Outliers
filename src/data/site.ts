@@ -18,7 +18,9 @@ export const siteConfig = {
   },
   navLinks: [
     { label: "Who We Are", href: "#team" },
-    { label: "Universal Projects", href: "#projects" },
+    { label: "Projects", href: "#projects" },
+    { label: "Achievements", href: "#achievements" },
+    { label: "Why Outliers", href: "#why-us" },
     { label: "Contact", href: "#contact" },
   ],
   contact: {

@@ -90,15 +90,15 @@ export function TeamSection() {
           </p>
 
           <p className="text-xs sm:text-sm text-slate-400 max-w-2xl mx-auto font-light leading-relaxed">
-            Scroll down to watch each member automatically reveal their Ghibli alter-ego one-by-one, or tap any card to explore their verified dossier.
+            Scroll down to watch each specialist card automatically flip to reveal their core skills and technical focus, or tap any card to explore their verified dossier.
           </p>
 
           {/* Sequential Scroll Flip Status Pill */}
           <div className="mt-3 flex items-center justify-center gap-2">
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full glass-panel border border-amber-400/30 text-[11px] font-mono text-amber-300">
-              <Wand2 className="w-3.5 h-3.5 text-[#F6E27A]" />
+              <Sparkles className="w-3.5 h-3.5 text-[#F6E27A]" />
               <span>
-                Auto-Flip on Scroll: {flippedCount}/4 Ghibli Personas Revealed
+                Auto-Flip on Scroll: {flippedCount}/4 Technical Profiles Revealed
               </span>
             </div>
 
@@ -107,7 +107,7 @@ export function TeamSection() {
               className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 hover:bg-amber-400/20 border border-white/10 hover:border-amber-400/50 text-[11px] font-mono text-slate-300 hover:text-white transition-colors"
             >
               <RotateCw className="w-3 h-3 text-[#F6E27A]" />
-              <span>{flippedCount === 4 ? "Reset to Photos" : "Flip All 4"}</span>
+              <span>{flippedCount === 4 ? "Reset to Overview" : "Flip All 4"}</span>
             </button>
           </div>
         </div>

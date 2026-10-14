@@ -9,6 +9,7 @@ import { SiteHeader } from "@/components/sections/SiteHeader";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { TeamSection } from "@/components/sections/TeamSection";
 import { ProjectsSection } from "@/components/sections/ProjectsSection";
+import { AchievementsSection } from "@/components/sections/AchievementsSection";
 import { WhyChooseUsSection } from "@/components/sections/WhyChooseUsSection";
 import { ContactSection } from "@/components/sections/ContactSection";
 import { SiteFooter } from "@/components/sections/SiteFooter";
@@ -56,10 +57,13 @@ export default function Home() {
         {/* Section 3: Universal Team Projects (What We Have Built) */}
         <ProjectsSection />
 
-        {/* Section 4: Why We Are The Perfect Squad (High-conviction value proposition) */}
+        {/* Section 4: Team Achievements & Honors (SIH, GSSoC, 4x National Hackathons, IJSDR) */}
+        <AchievementsSection />
+
+        {/* Section 5: Why Outliers / The Outliers Advantage (Convincing squad value proposition) */}
         <WhyChooseUsSection />
 
-        {/* Section 5: Collaboration & Contact (One-click email copy & organization link) */}
+        {/* Section 6: Collaboration & Contact (One-click email copy & organization link) */}
         <ContactSection />
       </main>
 
