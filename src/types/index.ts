@@ -41,7 +41,8 @@ export interface TeamMember {
     tools: string[];
   };
   individualAchievements: string[];
-  screenshots?: MemberScreenshot[];
+  detailedDescription: string;
+  teamRoleAndImpact: string;
   strongestProject: {
     title: string;
     role: string;

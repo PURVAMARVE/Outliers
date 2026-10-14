@@ -17,9 +17,18 @@ describe("Data Integrity & Master Prompt Contracts", () => {
       expect(member.skills.core.length).toBeGreaterThan(0);
       expect(member.strongestProject.title).toBeTruthy();
       expect(member.teamContributions.length).toBeGreaterThan(0);
+      expect(member.detailedDescription.length).toBeGreaterThan(50);
+      expect(member.teamRoleAndImpact.length).toBeGreaterThan(50);
+      expect((member as any).screenshots).toBeUndefined();
       expect(member.links.github).toBeTruthy();
       expect(member.links.linkedin).toBeTruthy();
     });
+
+    const memberNames = teamMembers.map((m) => m.name);
+    expect(memberNames).toContain("Tejas Karpe");
+    expect(memberNames).toContain("Purva Marve");
+    expect(memberNames).toContain("Anuradha Kadam");
+    expect(memberNames).toContain("Shreeraj Gudade");
   });
 
   it("must verify all team achievements have valid dates, categories, and verified statuses", () => {
