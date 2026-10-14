@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Sparkles, Compass } from "lucide-react";
 
 interface CosmicScrollProgressProps {
-  progress: number; // 0 to 1
-  activeSection: string;
-  activeSectionLabel: string;
+  progress?: number;
+  activeSection?: string;
+  activeSectionLabel?: string;
 }
 
 const SECTIONS = [
@@ -17,17 +17,81 @@ const SECTIONS = [
 ];
 
 export function CosmicScrollProgress({
-  progress,
-  activeSection,
-  activeSectionLabel,
+  progress: propProgress,
+  activeSection: propActiveSection,
+  activeSectionLabel: propActiveLabel,
 }: CosmicScrollProgressProps) {
   const [isHovered, setIsHovered] = useState(false);
+  const [currentLabel, setCurrentLabel] = useState(propActiveLabel || "Origin");
+  const [currentActiveSec, setCurrentActiveSec] = useState(propActiveSection || "hero");
+  const [displayPercentage, setDisplayPercentage] = useState(
+    propProgress !== undefined ? Math.round(propProgress * 100) : 0
+  );
 
-  // Height of the entire vertical cosmic trajectory
+  const trackRef = useRef<HTMLDivElement | null>(null);
+  const nodeRef = useRef<HTMLDivElement | null>(null);
+
   const trackHeightPx = 220;
-  // Current travel distance in pixels, clamped
-  const currentHeightPx = Math.max(Math.min(progress * trackHeightPx, trackHeightPx), 4);
-  const percentage = Math.round(progress * 100);
+  const initialHeight = Math.max(
+    Math.min((propProgress ?? 0) * trackHeightPx, trackHeightPx),
+    3
+  );
+
+  useEffect(() => {
+    let animId: number;
+
+    const updateLiveProgress = () => {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const normalized =
+        scrollHeight > 0
+          ? Math.min(Math.max(scrollTop / scrollHeight, 0), 1)
+          : (propProgress ?? 0);
+
+      const currentHeight = Math.max(Math.min(normalized * trackHeightPx, trackHeightPx), 3);
+      const pct = Math.round(normalized * 100);
+
+      // Direct synchronous DOM updates for 0ms latency live tracking
+      if (trackRef.current) {
+        trackRef.current.style.height = `${currentHeight}px`;
+      }
+      if (nodeRef.current) {
+        nodeRef.current.style.transform = `translate3d(0, ${currentHeight}px, 0)`;
+      }
+
+      // Check section in real-time
+      const scrollMiddle = scrollTop + window.innerHeight * 0.35;
+      for (const sec of SECTIONS) {
+        const el = document.getElementById(sec.id);
+        if (el) {
+          const top = el.offsetTop;
+          const height = el.offsetHeight;
+          if (scrollMiddle >= top && scrollMiddle < top + height) {
+            setCurrentActiveSec(sec.id);
+            setCurrentLabel(sec.label);
+            break;
+          }
+        }
+      }
+
+      setDisplayPercentage(pct);
+    };
+
+    const onScroll = () => {
+      cancelAnimationFrame(animId);
+      animId = requestAnimationFrame(updateLiveProgress);
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    updateLiveProgress();
+
+    return () => {
+      cancelAnimationFrame(animId);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, []);
 
   const handleJumpToSection = (id: string) => {
     const el = document.getElementById(id);
@@ -45,7 +109,7 @@ export function CosmicScrollProgress({
     >
       {/* Interactive Tooltip / Active Section Label */}
       <div
-        className={`absolute right-9 top-1/2 -translate-y-1/2 transition-all duration-300 pointer-events-auto ${
+        className={`absolute right-9 top-1/2 -translate-y-1/2 transition-all duration-200 pointer-events-auto ${
           isHovered ? "opacity-100 translate-x-0" : "opacity-0 translate-x-2 pointer-events-none"
         }`}
       >
@@ -55,10 +119,10 @@ export function CosmicScrollProgress({
             <span>Cosmic Progress</span>
           </div>
           <p className="text-xs font-bold text-[#FFFDF5] mt-0.5 truncate">
-            {activeSectionLabel}
+            {currentLabel}
           </p>
           <p className="text-[10px] font-mono text-[#94A3B8]">
-            {percentage}% Traversed
+            {displayPercentage}% Traversed
           </p>
         </div>
       </div>
@@ -66,10 +130,10 @@ export function CosmicScrollProgress({
       {/* Cosmic Track Container */}
       <div
         role="progressbar"
-        aria-valuenow={percentage}
+        aria-valuenow={displayPercentage}
         aria-valuemin={0}
         aria-valuemax={100}
-        aria-valuetext={`${percentage}% traversed, current section: ${activeSectionLabel}`}
+        aria-valuetext={`${displayPercentage}% traversed, current section: ${currentLabel}`}
         className="relative w-7 flex flex-col items-center"
         style={{ height: `${trackHeightPx}px` }}
       >
@@ -79,32 +143,34 @@ export function CosmicScrollProgress({
         </div>
 
         {/* 
-          CRITICAL REQUIREMENT: NO FUTURE PROGRESS TRACK.
-          Only the traversed path is rendered up to currentHeightPx.
-          Below this point, the track is 100% invisible/transparent.
+          LIVE COSMIC PROGRESS TRACK (0ms lag, direct scroll lock)
+          NO FUTURE TRACK below the point of travel.
         */}
         <div
-          className="absolute top-0 w-[2.5px] rounded-full transition-[height] duration-75 ease-out"
+          ref={trackRef}
+          className="absolute top-0 w-[2.5px] rounded-full pointer-events-none"
           style={{
-            height: `${currentHeightPx}px`,
+            height: `${initialHeight}px`,
             background:
-              "linear-gradient(to bottom, #F6E27A 0%, #E5A93C 40%, #38BDF8 80%, #A855F7 100%)",
+              "linear-gradient(to bottom, #F6E27A 0%, #E5A93C 30%, #38BDF8 65%, #A855F7 85%, #EC4899 100%)",
             boxShadow:
-              "0 0 10px rgba(246, 226, 122, 0.65), 0 0 18px rgba(56, 189, 248, 0.4)",
+              "0 0 10px rgba(246, 226, 122, 0.75), 0 0 18px rgba(56, 189, 248, 0.45)",
+            willChange: "height",
           }}
         />
 
         {/* 
-          Moving Endpoint Celestial Node:
-          Positioned precisely at the current bottom tip of the progress line.
+          LIVE MOVING ENDPOINT STAR NODE (Direct 3D transform, zero transition delay)
         */}
         <div
-          className="absolute w-3.5 h-3.5 -translate-x-1/2 -translate-y-1/2 left-1/2 z-20 transition-[top] duration-75 ease-out cursor-pointer group"
+          ref={nodeRef}
+          className="absolute top-0 w-3.5 h-3.5 -translate-x-1/2 -translate-y-1/2 left-1/2 z-20 cursor-pointer group"
           style={{
-            top: `${currentHeightPx}px`,
+            transform: `translate3d(0, ${initialHeight}px, 0)`,
+            willChange: "transform",
           }}
           onClick={() => setIsHovered(!isHovered)}
-          title={`Currently at ${activeSectionLabel} (${percentage}%)`}
+          title={`Currently at ${currentLabel} (${displayPercentage}%)`}
         >
           {/* Glowing Aura Ring */}
           <div className="absolute inset-0 rounded-full bg-[#F6E27A] blur-[3px] opacity-80 group-hover:scale-125 transition-transform" />
@@ -121,7 +187,7 @@ export function CosmicScrollProgress({
         </div>
       </div>
 
-      {/* Compact Quick-Jump Navigation Dots (Visible when hovered for accessibility) */}
+      {/* Quick-Jump Navigation Dots */}
       {isHovered && (
         <div className="mt-3 flex flex-col gap-1.5 p-1 rounded-full liquid-glass border border-[rgba(255,255,255,0.08)] animate-in fade-in duration-200">
           {SECTIONS.map((sec) => (
@@ -129,7 +195,7 @@ export function CosmicScrollProgress({
               key={sec.id}
               onClick={() => handleJumpToSection(sec.id)}
               className={`w-2 h-2 rounded-full transition-all ${
-                activeSection === sec.id
+                currentActiveSec === sec.id
                   ? "bg-[#F6E27A] scale-125 shadow-[0_0_8px_#F6E27A]"
                   : "bg-[#64748B] hover:bg-[#FFFDF5]"
               }`}

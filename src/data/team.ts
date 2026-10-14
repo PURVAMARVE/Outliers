@@ -4,21 +4,20 @@ export const teamMembers: TeamMember[] = [
   {
     id: "member-1",
     name: "Tejas Karpe",
-    role: "CSE (AI & ML) | Backend & Systems",
+    role: "Backend & Systems Engineer",
     tagline: "Scalable software solutions, backend architectures, and AI-powered applications.",
-    bio: "Third-year Computer Science and Engineering (AI & ML) student with experience in Java, Python, backend microservices, and AI-powered platforms. Focused on high-scale distributed systems and real-world problem solving.",
+    bio: "CSE (AI & ML) student with hands-on experience in Java, Python, backend microservices, and AI-powered systems.",
     avatarUrl: "/images/team/member-1.webp",
     avatarSeed: "Tejas",
     accentColor: "#E5A93C",
     skills: {
       core: ["Java", "Python", "TypeScript", "Node.js"],
-      secondary: ["PostgreSQL", "MongoDB", "Redis", "Spring Boot"],
+      secondary: ["PostgreSQL", "MongoDB", "Redis", "REST APIs"],
       tools: ["Gemini API", "RAG Pipelines", "AWS", "Git/GitHub"],
     },
     individualAchievements: [
       "Top 3% Global Contributor — GirlScript Summer of Code (Ranked #1034 of 45,000+)",
-      "Published Research Paper in IJSDR on Educational Systems & Career Excellence",
-      "Core Contributor to Kala Setu — Smart India Hackathon Platform",
+      "Published Research Paper on Educational Technology in IJSDR Journal",
     ],
     screenshots: [
       {
@@ -41,7 +40,7 @@ export const teamMembers: TeamMember[] = [
     },
     teamContributions: [
       "Engineered low-latency REST APIs, caching layers, and database synchronization",
-      "Spearheaded enterprise backend services at Sky Aviation Pvt. Ltd.",
+      "Backend Developer at Sky Aviation Pvt. Ltd. | Python Developer Intern at Orbit Solutions",
     ],
     experienceSnippet: "Software Developer at Sky Aviation Pvt. Ltd. | Python Developer Intern at Orbit Solutions.",
     ghibliRole: "Spirit Navigator & Clockwork Alchemist",
@@ -56,9 +55,9 @@ export const teamMembers: TeamMember[] = [
   {
     id: "member-2",
     name: "Purva Marve",
-    role: "CSE (AI & ML) | Frontend Lead & AI/ML",
+    role: "Frontend Lead & AI/ML",
     tagline: "Turning ambitious ideas into functional, captivating digital experiences.",
-    bio: "CSE (AI & ML) student who loves building intuitive frontend experiences, exploring Agentic AI systems, and competing in fast-paced hackathons with zero-defect execution.",
+    bio: "CSE (AI & ML) student passionate about modern frontend systems, Agentic AI, and building hackathon-winning MVPs.",
     avatarUrl: "/images/team/member-2.webp",
     avatarSeed: "Purva",
     accentColor: "#F3C969",
@@ -68,10 +67,8 @@ export const teamMembers: TeamMember[] = [
       tools: ["Tailwind CSS", "Figma", "Git/GitHub", "Vite"],
     },
     individualAchievements: [
-      "Finalist — 24-Hour Hackathon (Event Fusion, SKNCOE Pune)",
-      "Finalist — CodeRush 2.0 (YCCE, Nagpur)",
-      "Finalist — 24-Hour Hackathon (HackWave 3.0, CDGI Indore)",
-      "Finalist — Event CuriousSparc (VIT Pune)",
+      "4x National Hackathon Podium Finalist (Pune, Nagpur, Indore)",
+      "Architected Self-Evolving Autonomous Research Agent",
     ],
     screenshots: [
       {
@@ -94,7 +91,7 @@ export const teamMembers: TeamMember[] = [
     },
     teamContributions: [
       "Crafted responsive user experiences and visual hierarchy at Sky Aviation Pvt. Ltd.",
-      "Engineered frontend client interfaces and hackathon pitch demonstrations",
+      "Frontend Developer at Sky Aviation Pvt. Ltd. | 4x National Hackathon Finalist",
     ],
     experienceSnippet: "Frontend Developer at Sky Aviation Pvt. Ltd. | 4x National Hackathon Finalist.",
     ghibliRole: "Starlight Oracle & Forest Seer",
@@ -110,8 +107,8 @@ export const teamMembers: TeamMember[] = [
     id: "member-3",
     name: "Omkar Patil",
     role: "Full-Stack MERN & Ledger Architect",
-    tagline: "Building secure financial ledger architectures and tactile web platforms.",
-    bio: "Passionate Full-Stack Developer specializing in MERN stack and backend engineering. Focused on solving real-world challenges through double-entry transaction systems and thoughtful UI/UX.",
+    tagline: "Clean, efficient code for secure banking ledgers and AI-enhanced web platforms.",
+    bio: "Full-Stack Developer specializing in MERN engineering, scalable ledger systems, and intuitive UI/UX design.",
     avatarUrl: "/images/team/member-3.webp",
     avatarSeed: "Omkar",
     accentColor: "#D4AF37",
@@ -123,7 +120,6 @@ export const teamMembers: TeamMember[] = [
     individualAchievements: [
       "Completed 2-Month Intensive Hands-on Android Development Internship",
       "Architected Secure Banking Ledger with Double-Entry Transaction Verification",
-      "Engineered CampusCart AI-Powered Student Marketplace",
     ],
     screenshots: [
       {
@@ -148,7 +144,7 @@ export const teamMembers: TeamMember[] = [
       "Architected database schemas, double-entry ledger tracking, and JWT cookie security",
       "Constructed reusable React interface modules and API integration contracts",
     ],
-    experienceSnippet: "Hands-on Android Developer Intern | Specialist in MERN stack and secure banking API design.",
+    experienceSnippet: "Android Developer Intern | Specialist in MERN stack and secure banking API design.",
     ghibliRole: "Sky Voyager & Lantern Artisan",
     ghibliTagline: "Spins glowing firefly lanterns to light pathfinders across the vast twilight cloudscape.",
     ghibliAvatarUrl: "/images/team/ghibli-rohan.webp",
@@ -163,7 +159,7 @@ export const teamMembers: TeamMember[] = [
     name: "Shreeraj Gudade",
     role: "Computer Science × AI/ML Engineer",
     tagline: "Understanding systems beyond the interface. Engineering solutions beyond the obvious.",
-    bio: "Computer Science and AI/ML engineer exploring deep learning, NLP sentiment analysis, and containerized deployment infrastructure. Driven by algorithmic rigor and ethical hacking.",
+    bio: "Computer Science & AI/ML engineer exploring deep learning, NLP sentiment analysis, and containerized deployment infrastructure.",
     avatarUrl: "/images/team/member-4.webp",
     avatarSeed: "Shreeraj",
     accentColor: "#F1B743",
@@ -175,7 +171,6 @@ export const teamMembers: TeamMember[] = [
     individualAchievements: [
       "LeetCode Competitive Problem Solver in Algorithmic Optimization",
       "Smart India Hackathon Internal Hackathon AI Solution Contributor",
-      "Author of Sentimental AI Deep Learning Classifier & ManiFeast",
     ],
     screenshots: [
       {

@@ -86,9 +86,14 @@ body {
   selection-color: #FFFDF5;
 }
 
-/* Hide default OS cursor when Spaceship cursor is actively tracking mouse movement */
+/* Hide default OS cursor globally when Spaceship cursor is active */
+html.spaceship-cursor-active,
+html.spaceship-cursor-active *,
 body.spaceship-cursor-active,
-body.spaceship-cursor-active * {
+body.spaceship-cursor-active *,
+body.spaceship-cursor-active a,
+body.spaceship-cursor-active button,
+body.spaceship-cursor-active [role="button"] {
   cursor: none !important;
 }
 
